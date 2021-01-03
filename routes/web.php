@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//admin_panel
+Route::middleware(['role:admin'])->prefix('admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('homeAdmin');
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users');
+});
+
+//operator
+Route::middleware(['role:operator'])->prefix('admin')->group(function () {
+    //products
+    Route::get('/products', [App\Http\Controllers\Admin\ProductsController::class, 'index'])->name('products');
+    Route::post('/addproduct', [App\Http\Controllers\Admin\ProductsController::class, 'create'])->name('add-product');
+    Route::get('/destroyproduct/{id}', [App\Http\Controllers\Admin\ProductsController::class, 'destroy'])->name('destroyproduct');
+    Route::get('/showproduct/{id}', [App\Http\Controllers\Admin\ProductsController::class, 'show'])->name('showproduct');
+    Route::post('/updateproduct/{id}', [App\Http\Controllers\Admin\ProductsController::class, 'update'])->name('updateproduct');
+});
