@@ -21,46 +21,41 @@
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Nag" style="width: 44px;">id</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Posit" style="width: 399px;">ФИО</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Posit" style="width: 40px;">Роль</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Off" style="width: 110px;">Номер</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Ag" style="width: 294px;">E-mail</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="St" style="width: 172px;">Start date</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="g" style="width: 220px;">Действия</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="g" style="width: 100px;">Действия</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($users as $user)
                                             <tr>
                                                 <td>
-                                                    {{ $user['id'] }}
+                                                    {{ $user->id }}
                                                 </td>
                                                 <td>
-                                                    {{ $user['fio'] }}
+                                                    {{ $user->fio }}
                                                 </td>
                                                 <td>
-                                                    {{ $user['phone'] }}
+                                                    {{ $user->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $user['email'] }}
+                                                    {{ $user->phone }}
                                                 </td>
                                                 <td>
-                                                    {{ $user['created_at'] }}
+                                                    {{ $user->email }}
+                                                </td>
+                                                <td>
+                                                    {{ $user->created_at }}
                                                 </td>
 
                                                 <td class="project-actions text-right">
-                                                    <a class="btn btn-info btn-sm" href="#">
+                                                    <a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->id) }}">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
                                                         Редактировать
                                                     </a>
-                                                    <form action="#" method="POST" style="display: inline-block">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm delete-btn">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Удалить
-                                                        </button>
-                                                    </form>
                                                 </td>
                                             </tr>
                                             @endforeach

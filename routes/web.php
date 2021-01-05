@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrdersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,10 +28,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['role:admin'])->prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('homeAdmin');
     Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users');
+    Route::resource('user', UserController::class);
+    Route::get('orders', [App\Http\Controllers\Admin\OrdersController::class, 'index'])->name('orders');
+    Route::resource('order', OrdersController::class);
 });
 
 //operator
-Route::middleware(['role:operator'])->prefix('admin')->group(function () {
+Route::middleware(['role:operator'])->prefix('operator')->group(function () {
     //products
     Route::get('/products', [App\Http\Controllers\Admin\ProductsController::class, 'index'])->name('products');
     Route::post('/addproduct', [App\Http\Controllers\Admin\ProductsController::class, 'create'])->name('add-product');
