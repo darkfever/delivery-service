@@ -8,7 +8,6 @@
         <div class="card">
             <div class="card-header">Редактирование пользователя</div>
             <div class="card-body">
-                @foreach($users as $user)
                 <form method="POST" action="{{ route('user.update', $user->id) }}">
                     @csrf
                     @method('PUT')
@@ -28,7 +27,7 @@
                         <label for="role_name" class="col-md-4 col-form-label text-md-right">{{ __('Роль') }}</label>
                         <div class="col-md-6">
                             <select id="role_name" type="text" class="form-control" name="role_name" id="input-select">
-                                <option selected>{{ $user->role_name }}</option>
+                                <option selected>{{ $user->role->name }}</option>
                                 @foreach($roles as $role)
                                 <option>{{$role->name}}</option>
                                 @endforeach
@@ -41,7 +40,6 @@
                             <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" required autocomplete="email">
                         </div>
                     </div>
-                    @endforeach
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-success">Сохранить</button>

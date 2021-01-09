@@ -38,7 +38,7 @@
                                                     {{ $user->fio }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->name }}
+                                                    {{ $user->role->name }}
                                                 </td>
                                                 <td>
                                                     {{ $user->phone }}
