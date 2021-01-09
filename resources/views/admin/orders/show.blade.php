@@ -14,19 +14,19 @@
                     <div class="form-group row">
                         <label for="owner_id" class="col-md-2 col-form-label text-md-right">Инициатор</label>
                         <div class="col-md-3">
-                            <input id="owner_id" type="text" class="form-control" name="owner_id" value="{{ $owner_id[0]->fio }}" required autocomplete="off" autofocus>
+                            <input id="owner_id" type="text" class="form-control" name="owner_id" value="{{ $orders->owner->fio }}" required autocomplete="off" autofocus>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="operator_id" class="col-md-2 col-form-label text-md-right">Оператор</label>
                         <div class="col-md-3">
-                            <input id="operator_id" type="text" class="form-control" name="operator_id" value="{{ $operator_id[0]->fio }}" required autocomplete="off" autofocus>
+                            <input id="operator_id" type="text" class="form-control" name="operator_id" @if(isset($orders->operator)) value="{{ $orders->operator->fio }}" @endif required autocomplete="off" autofocus>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="courier_id" class="col-md-2 col-form-label text-md-right">Курьер</label>
                         <div class="col-md-3">
-                            <input id="courier_id" type="text" class="form-control" name="courier_id" value="{{ $courier_id[0]->fio }}" required autocomplete="off" autofocus>
+                            <input id="courier_id" type="text" class="form-control" name="courier_id" @if(isset($orders->courier)) value="{{ $orders->courier->fio }}" @endif required autocomplete="off" autofocus>
                         </div>
                     </div>
                     <div class="form-group row">

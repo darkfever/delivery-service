@@ -34,7 +34,7 @@
                                                     {{ $order->id }}
                                                 </td>
                                                 <td>
-                                                    {{ $order->fio }}
+                                                    {{ $order->owner->fio }}
                                                 </td>
                                                 <td>
                                                     {{ $order->from }}

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Operator;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
 
-class OrdersController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        return view('test');
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,9 +15,10 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $orders = Orders::all();
-        return view('admin.orders.index', compact(['orders']));
+    {   
+        $user_id = auth()->user()->id;
+        $orders = Orders::where('owner_id', $user_id)->orderBy('id')->get();
+        return view('user.orders.index', compact(['orders']));
     }
 
     /**
@@ -26,8 +27,8 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        return view('user.orders.create');
     }
 
     /**
@@ -38,7 +39,18 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Orders::create([
+            'owner_id' => auth()->user()->id,
+            'from' => $request->from,
+            'to' => $request->to,
+            'preference' => $request->preference,
+            'size' => $request->size,
+            'weight' => $request->weight,
+            'status' => 'created',
+            'recipient_contacts' => $request->recipient_contacts,
+            'approximate_time' => $request->approximate_time
+        ]);
+        return redirect()->route('userorders');
     }
 
     /**
@@ -49,8 +61,7 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        $orders = Orders::Find($id);
-        return view('admin.orders.show', compact(['orders']));
+        //
     }
 
     /**

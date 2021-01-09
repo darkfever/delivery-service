@@ -42,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->hasOneThrough(Role::class, model_has_roles::class, 'model_id', 'id', 'id', 'role_id');
+    }
 }

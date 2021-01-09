@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () { 
     return view('welcome');
 });
 
@@ -33,12 +33,15 @@ Route::middleware(['role:admin'])->prefix('admin')->group(function () {
     Route::resource('order', OrdersController::class);
 });
 
+//user_panel
+Route::middleware(['role:user'])->prefix('user')->group(function () {
+    Route::get('/orders', [App\Http\Controllers\User\OrdersController::class, 'index'])->name('userorders');
+    Route::get('/create', [App\Http\Controllers\User\OrdersController::class, 'create'])->name('createorder');
+    Route::post('/store', [App\Http\Controllers\User\OrdersController::class, 'store'])->name('store');
+});
+
 //operator
 Route::middleware(['role:operator'])->prefix('operator')->group(function () {
-    //products
-    Route::get('/products', [App\Http\Controllers\Admin\ProductsController::class, 'index'])->name('products');
-    Route::post('/addproduct', [App\Http\Controllers\Admin\ProductsController::class, 'create'])->name('add-product');
-    Route::get('/destroyproduct/{id}', [App\Http\Controllers\Admin\ProductsController::class, 'destroy'])->name('destroyproduct');
-    Route::get('/showproduct/{id}', [App\Http\Controllers\Admin\ProductsController::class, 'show'])->name('showproduct');
-    Route::post('/updateproduct/{id}', [App\Http\Controllers\Admin\ProductsController::class, 'update'])->name('updateproduct');
+    Route::get('/', [App\Http\Controllers\Operator\HomeController::class, 'index'])->name('operator');
 });
+

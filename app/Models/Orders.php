@@ -25,4 +25,19 @@ class Orders extends Model
         'sum',
         'approximate_time'
     ];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(User::class, 'operator_id');
+    }
+
+    public function courier()
+    {
+        return $this->belongsTo(User::class, 'courier_id');
+    }
 }
