@@ -26,7 +26,7 @@
                         <h2>Трекинг</h2>
                     </li>
                 </ul>
-                <a class="btn btn-lg btn-block btn-success" href="{{route('createorder')}}">Оформить заказ</a>
+                <a class="btn btn-lg btn-block btn-success" href="{{route('userorders.create')}}">Оформить заказ</a>
             </div>
         </div>
     </div>

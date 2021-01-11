@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\User\OrdersController as UOController;
+use App\Http\Controllers\Operator\HomeController;
+use App\Http\Controllers\Operator\OrdersController as OOController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,22 +29,39 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //admin_panel
 Route::middleware(['role:admin'])->prefix('admin')->group(function () {
-    Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('homeAdmin');
-    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users');
-    Route::resource('user', UserController::class);
-    Route::get('orders', [App\Http\Controllers\Admin\OrdersController::class, 'index'])->name('orders');
-    Route::resource('order', OrdersController::class);
+    Route::resources([
+        '/' => AdminController::class,
+        'user' => UserController::class,
+        'orders' => OrdersController::class,
+    ]);
 });
 
 //user_panel
 Route::middleware(['role:user'])->prefix('user')->group(function () {
-    Route::get('/orders', [App\Http\Controllers\User\OrdersController::class, 'index'])->name('userorders');
-    Route::get('/create', [App\Http\Controllers\User\OrdersController::class, 'create'])->name('createorder');
-    Route::post('/store', [App\Http\Controllers\User\OrdersController::class, 'store'])->name('store');
+    Route::resource('userorders', UOController::class);
+    Route::get('update/{id}', [UOController::class, 'update'])->name('update');
+
 });
 
 //operator
 Route::middleware(['role:operator'])->prefix('operator')->group(function () {
-    Route::get('/', [App\Http\Controllers\Operator\HomeController::class, 'index'])->name('operator');
+    Route::get('processing', [OOController::class, 'processingorders'])->name('processing');
+    Route::get('created', [OOController::class, 'createdorders'])->name('createdorders');
+    Route::get('send', [OOController::class, 'sendorders'])->name('sendorders');
+    Route::get('end', [OOController::class, 'endorders'])->name('endorders');
+    Route::get('cancel/{id}', [OOController::class, 'cancelorders'])->name('cancel');
+    Route::resources([
+        '/home' => HomeController::class,
+        'operorder' => App\Http\Controllers\Operator\OrdersController::class
+    ]);
+});
+
+//courier
+Route::middleware(['role:courier'])->prefix('courier')->group(function () {
+    Route::get('/', [App\Http\Controllers\Courier\HomeController::class, 'index'])->name('courierhome');
+    Route::get('/courier_orders', [App\Http\Controllers\Courier\OrdersController::class, 'orders'])->name('courier_orders');
+    Route::get('/courierend', [App\Http\Controllers\Courier\OrdersController::class, 'courierend'])->name('courierend');
+    Route::get('/courierupdate/{id}', [App\Http\Controllers\Courier\OrdersController::class, 'courierupdate'])->name('courierupdate');
+    //courierend
 });
 

@@ -5,7 +5,7 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Внимение!!!</h1>
     <p class="lead">После получения стоимости и подтверждения заказа отозвать оформленный заказ не получится, так как после вашего подтверждения заказ принимается в работу мгновенно!</p>
-    <a class="btn btn-outline-success" href="{{route('createorder')}}" role="button">Оформить новый заказ</a>
+    <a class="btn btn-outline-success" href="{{route('userorders.create')}}" role="button">Оформить новый заказ</a>
 </div>
 <div class="container" style="max-width: 100%;">
     <table class="table table-bordered table-hover">
@@ -37,21 +37,25 @@
                 <td>{{$order->approximate_time}}</td>
                 <td>{{$order->created_at}}</td>
                 <td>
+                    <?php
+                    if ($order->status === 'created') {
+                        echo 'На подтверджении';
+                    } elseif ($order->status === 'delivered') {
+                        echo 'Успешно завершен';
+                    } else {
+                        echo 'Ожидает подверждения';
+                    }
+                    ?>
+                </td>
+                <td>
                     @if($order->status === 'created')
-                    <?php
-                        $button = 'Ожидайте подтверждения';
-                        $state = 'disabled';
-                        echo 'На подтверджении'
-                    ?>
+                    <a class="btn btn-outline-primary disabled" href="{{ route('update', $order->id) }}" role="button">Ожидайте</a>
+                    @elseif($order->status === 'delivered')
+                    <a class="btn btn-outline-success disabled" href="{{ route('update', $order->id) }}" role="button">Завершен</a>
                     @else
-                    <?php
-                        $button = 'Подтвердить';
-                        $state = '';
-                        echo 'В процессе';
-                    ?>
+                    <a class="btn btn-outline-success" href="{{ route('update', $order->id) }}" role="button">Подтвердить</a>
                     @endif
                 </td>
-                <td><a class="btn btn-outline-success {{$state}}" href="#" role="button"">{{$button}}</a></td>
             </tr>
             @endforeach
         </tbody>

@@ -31,7 +31,7 @@
     <!-- ============================================================== -->
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="{{route('homeAdmin')}}">Служба доставки</a>
+            <a class="navbar-brand" href="{{route('index')}}">Служба доставки: администратор</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -75,16 +75,16 @@
                             Menu
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('homeAdmin')}}"><i class="far fa-star"></i>Главная <span class="badge badge-success">6</span></a>
+                            <a class="nav-link" href="{{route('index')}}"><i class="far fa-star"></i>Главная <span class="badge badge-success">6</span></a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('users')}}"><i class="fas fa-user-circle"></i>Пользователи <span class="badge badge-success">6</span></a>
+                            <a class="nav-link" href="{{route('user.index')}}"><i class="fas fa-user-circle"></i>Пользователи <span class="badge badge-success">6</span></a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('orders')}}"><i class="far fa-envelope"></i>Заказы <span class="badge badge-success">6</span></a>
+                            <a class="nav-link" href="{{route('orders.index')}}"><i class="far fa-envelope"></i>Заказы <span class="badge badge-success">6</span></a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('homeAdmin')}}"><i class="far fa-chart-bar"></i>Статистика <span class="badge badge-success">6</span></a>
+                            <a class="nav-link" href="#"><i class="far fa-chart-bar"></i>Статистика <span class="badge badge-success">6</span></a>
                         </li>
                     </ul>
                 </div>
@@ -151,7 +151,6 @@
     <script src="{{ asset('admin_panel/assets/vendor/charts/c3charts/c3.min.js') }}"></script>
     <script src="{{ asset('admin_panel/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
     <script src="{{ asset('admin_panel/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
-    <script src="{{ asset('admin_panel/assets/libs/js/dashboard-ecommerce.js') }}"></script>
     <!-- data tables -->
     <script src="{{ asset('admin_panel/assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
     <script src="{{ asset('admin_panel/assets/libs/js/main-js.js') }}"></script>

@@ -32,7 +32,8 @@ class HomeController extends Controller
             return redirect('/admin');
         }
         else if($role === 'operator'){
-            return redirect('/operator');
+            return redirect('/operator/home');
         }
+        else return redirect()->route('courierhome');
     }
 }

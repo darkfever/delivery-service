@@ -11,7 +11,7 @@
                     <h5 class="mb-0">Создание нового заказа</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('store')}}">
+                    <form method="POST" action="{{route('userorders.store')}}">
                         @csrf
                         @method('POST')
                         <div class="form-group row">

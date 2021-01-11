@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <a href="{{route('orders')}}" class="btn btn-success">Назад</a>
+                            <a href="{{route('orders.index')}}" class="btn btn-success">Назад</a>
                         </div>
                     </div>
                 </div>

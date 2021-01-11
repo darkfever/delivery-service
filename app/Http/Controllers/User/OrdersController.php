@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Orders;
-use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -17,7 +16,7 @@ class OrdersController extends Controller
     public function index()
     {   
         $user_id = auth()->user()->id;
-        $orders = Orders::where('owner_id', $user_id)->orderBy('id')->get();
+        $orders = Orders::where('owner_id', $user_id)->whereIn('status', ['new', 'delivered', 'created'])->orderBy('id')->get();
         return view('user.orders.index', compact(['orders']));
     }
 
@@ -50,7 +49,7 @@ class OrdersController extends Controller
             'recipient_contacts' => $request->recipient_contacts,
             'approximate_time' => $request->approximate_time
         ]);
-        return redirect()->route('userorders');
+        return redirect()->route('userorders.index');
     }
 
     /**
@@ -82,9 +81,12 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $order = Orders::Find($id);
+        $order->status = 'send';
+        $order->save();
+        return redirect()->route('userorders.index');
     }
 
     /**

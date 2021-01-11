@@ -49,7 +49,7 @@
                                                     {{ $order->sum }}
                                                 </td>
                                                 <td class="project-actions text-right">
-                                                    <a class="btn btn-info btn-sm" href="{{ route('order.show', $order->id) }}">
+                                                    <a class="btn btn-info btn-sm" href="{{ route('orders.show', $order->id) }}">
                                                         <i class="fas fa-pencil-alt"></i>Просмотр
                                                     </a>
                                                 </td>

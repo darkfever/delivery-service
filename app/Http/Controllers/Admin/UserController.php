@@ -84,7 +84,7 @@ class UserController extends Controller
         $new_role = Role::where('name', $request->role_name)->first();
         model_has_roles::where('model_id', $id)
         ->update(['role_id' => $new_role->id]);
-        return redirect()->route('users');
+        return redirect()->route('user.index');
     }
 
     /**

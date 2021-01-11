@@ -16,4 +16,9 @@ class model_has_roles extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function couriers()
+    {
+        return $this->hasMany(User::class, 'id', 'model_id');
+    }
 }
